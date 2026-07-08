@@ -2,9 +2,9 @@ name: Daily Trend Check
 
 on:
   schedule:
-    # 毎日 JST 9:00 に実行（UTC 0:00）。時刻を変えたい場合はここを調整してください。
     # cron記法はUTC基準です。JST = UTC+9。
-    - cron: "0 0 * * *"
+    - cron: "0 21 * * *" # JST 朝6:00
+    - cron: "0 12 * * *" # JST 夜21:00
   workflow_dispatch: {} # 手動実行用（Actionsタブから"Run workflow"で即実行できます）
 
 jobs:
