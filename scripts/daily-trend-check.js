@@ -32,7 +32,9 @@ const today = new Date().toLocaleDateString("ja-JP", {
 const PROMPT = `あなたはSNS・テックトレンドのリサーチャーです。本日（${today}）時点での最新トレンドを、Web検索を使って実際に調査したうえで、以下の4カテゴリについて日本語でランキング形式にまとめてください。
 
 ## 1. YouTubeトレンド
-- YouTube「急上昇」タブの上位動画（総合・音楽・ゲームなど）
+※旧「急上昇」タブは2025年7月21日に廃止済み。代わりに以下を調査すること。
+- YouTube Charts（charts.youtube.com）の急上昇ミュージックビデオ、週間トップポッドキャスト番組、話題の映画予告編ランキング
+- YouTube「探索」メニューの「ゲーム」ページ（Gaming Explore）で人気のゲーム動画
 - Googleトレンド（YouTube検索）で急上昇中のキーワード
 
 ## 2. TikTokトレンド
