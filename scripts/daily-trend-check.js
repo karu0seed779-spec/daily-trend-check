@@ -29,34 +29,21 @@ const today = new Date().toLocaleDateString("ja-JP", {
   weekday: "short",
 });
 
-const PROMPT = `あなたはSNS・テックトレンドのリサーチャーです。本日（${today}）時点での最新トレンドを、Web検索を使って実際に調査したうえで、以下の4カテゴリについて日本語でランキング形式にまとめてください。
+const PROMPT = `本日（${today}）時点で話題になっている以下の情報を、Web検索で確認したうえで、シンプルな箇条書きのみで回答してください。説明文は不要です。
 
-## 1. YouTubeトレンド
-※旧「急上昇」タブは2025年7月21日に廃止済み。代わりに以下を調査すること。
-- YouTube Charts（charts.youtube.com）の急上昇ミュージックビデオ、週間トップポッドキャスト番組、話題の映画予告編ランキング
-- YouTube「探索」メニューの「ゲーム」ページ（Gaming Explore）で人気のゲーム動画
-- Googleトレンド（YouTube検索）で急上昇中のキーワード
+*YouTube*
+・急上昇中のキーワード（上位5つ）
 
-## 2. TikTokトレンド
-- TikTok Creative CenterのTrend Discoveryで話題のハッシュタグ・楽曲・クリエイター（日本、直近7日間）
+*TikTok*
+・トレンドハッシュタグ（上位5つ）
 
-## 3. X（旧Twitter）トレンド
-- Yahoo!リアルタイム検索での日本国内トレンドキーワード
-- ついっトレンド（Twittrend）での全国トレンド
+*X（旧Twitter）*
+・トレンドキーワード（上位5つ、日本国内）
 
-## 4. Changelog（テック・開発者向けトレンド）
-- GitHub Trendingで今日・今週注目のリポジトリ
-- Product Huntで本日の人気プロダクト・アップデート
-- Zenn / Qiitaで話題の技術記事
+*GitHub Trending*
+・注目リポジトリ名（上位5つ）
 
-### 出力フォーマット（Slack投稿を想定し、Markdownの強調記号「**」ではなくSlack記法を使うこと）
-各カテゴリごとに、上位5件程度を以下の形式でまとめてください。
-
-*[カテゴリ名]*
-1. [トレンド名/タイトル] - 簡単な説明（1〜2文）
-2. ...
-
-最後に「本日の注目トピック」を3つ程度、簡潔にピックアップしてください。
+出力は各カテゴリ5行以内、単語のみ。前置き・まとめ・解説は一切書かないこと。`;
 
 ### 注意事項
 - 必ずWeb検索で裏取りしてから記載する。推測で書かない。
@@ -73,13 +60,13 @@ async function callClaude() {
     },
     body: JSON.stringify({
       model: "claude-sonnet-5",
-      max_tokens: 4000,
+      max_tokens: 800,
       messages: [{ role: "user", content: PROMPT }],
       tools: [
         {
           type: "web_search_20250305",
           name: "web_search",
-          max_uses: 8,
+          max_uses: 6,
           user_location: {
             type: "approximate",
             country: "JP",
